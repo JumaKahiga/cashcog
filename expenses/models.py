@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Expense(models.Model):
     uuid = models.CharField(max_length=250, primary_key=True)
