@@ -54,7 +54,7 @@ class DataLoader:
 
 if __name__ == '__main__':
     consumer = KafkaConsumer(
-        'raw_expenses', bootstrap_servers=['localhost:9092'],
+        'raw_expenses', bootstrap_servers=['kafka:9092'],
         auto_offset_reset='earliest', enable_auto_commit=True,
         group_id='my-group', value_deserializer=lambda x: json.loads(x.decode('utf-8'))) # noqa
 

@@ -10,8 +10,9 @@ COPY ./requirements.txt ./
 # install all the dependencies
 RUN pip3 install -r requirements.txt
 
-COPY ./ ./
+COPY . .
 
-ENTRYPOINT ["sh"]
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.2/wait /wait
+RUN chmod +x /wait
 
-CMD ["entry_point.sh"]
+CMD /wait && /usr/cashcog/entry_point.sh

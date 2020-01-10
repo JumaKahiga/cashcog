@@ -3,20 +3,13 @@
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
+export DJANGO_SETTINGS_MODULE=src.settings
 
 echo "<<<<<<<< Database Setup >>>>>>>>>"
 
-# python3 manage.py migrate
+python3 manage.py migrate
 
 echo "<<<<<<<< Database Setup Successfully >>>>>>>>>>>>>>>>>>"
-
-docker run -d --restart=always --name cashcog_kafka --network kafka-network
-
-bin/zookeeper-server-start.sh config/zookeeper.properties
-
-bin/kafka-server-start.sh config/server.properties
-
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 
 echo "<<<<<<<< API Streaming Starting >>>>>>>>>>>>>>>>>>"
 
@@ -26,4 +19,5 @@ echo "<<<<<<<< Load Data into Database Starting >>>>>>>>>>>>>>>>>>"
 
 python3 -m utilities.load_data &
 
+echo "<<<<<<<< Start API >>>>>>>>>>>>>>>>>>"
 python3 manage.py runserver 
